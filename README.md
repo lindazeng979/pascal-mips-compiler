@@ -302,12 +302,3 @@ challenge (`hello.asm`, `sum.asm`) written with Audrey Cheng. Run them in MARS o
 `labs/subroutines/subroutines.asm` — `max2`, `max3`, factorial, and Fibonacci implemented as
 proper MIPS subroutines with stack-based save/restore. This is where the calling convention
 used by the code generator was worked out by hand first.
-
----
-
-## License
-
-Released under the MIT License — see [LICENSE](LICENSE).
-
-The course handouts and lecture slides are not included in this repository and remain the
-property of The Harker School.
