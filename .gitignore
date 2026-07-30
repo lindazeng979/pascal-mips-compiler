@@ -1,0 +1,36 @@
+# ─── Java build output ────────────────────────────────────────────────
+*.class
+out/
+bin/
+target/
+
+# ─── macOS cruft ──────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+__MACOSX/
+
+# ─── Course handouts and lecture slides ───────────────────────────────
+# Harker School course material.
+docs/
+
+# ─── Third-party tooling ──────────────────────────────────────────────
+# The JFlex distribution used by Lab 2. Download from https://jflex.de
+# rather than vendoring it here.
+jflex-1.9.1/
+
+# ─── Large lab input data ─────────────────────────────────────────────
+# The Lab 2 Twitter corpus: ~123 MB
+labs/jflex/Twitter+data+in+sheets.txt
+labs/jflex/Twitter+data+in+sheets.csv.txt
+labs/jflex/Linda,Tiffany-JflexTwitterData.zip
+labs/jflex/JflexScannerTemplate.flex
+
+# ─── Archive ──────────────────────────────────────────────────────────
+# Kept locally for reference, deliberately out of the repository:
+#   zips/       pre-git manual version history (~130 MB)
+#   old-java/   superseded drafts of Scanner.java and Parser.java
+#   stale-asm/  generated .asm that no longer matches any source
+archive/
+
+.vscode/
+atcheckstyleIntelliJ.xml
