@@ -1,13 +1,12 @@
-# Compiler (Pascal → MIPS)
+# Pascal-to-MIPS Compiler
 
-A compiler for a subset of Pascal, written from scratch in Java. It reads Pascal-like source and emits MIPS
-assembly that runs in MARS or SPIM. (No parser generator, existing compiler framework, or external dependencies necessary)
+A compiler for a Pascal-like language, built from scratch in Java. It parses source code and generates MIPS assembly compatible with MARS and SPIM (without relying on parser generators, compiler frameworks, or external dependencies).
 
 The same abstract syntax tree drives two backends: a tree-walking interpreter that
 executes the program directly, and a code generator that emits MIPS (compiler).
 
 Built for *Honors Advanced Topics in Computer Science: Compilers & Interpreters* (The Harker
-School, 2023–24), across a sequence of labs eaching adding a stage to the pipeline.
+School, 2023–24), across a sequence of labs each adding a stage to the pipeline.
 
 **Author:** Linda Zeng
 
@@ -247,21 +246,10 @@ Twitter corpus; and various `.zip` lab submissions.
 
 ## Known limitations
 
-- **`FOR` and `READLN` have no code generation.** Both implement `exec`, so the *interpreter*
-  handles them correctly, but neither implements `compile`. Compiling a program that uses
-  them hits `RuntimeException: Implement me!!!!` from the `Statement` base class.
-- **Undeclared globals produce unassemblable output.** `Program.compile` emits a `.data` entry
-  only for names that appeared in a `VAR` declaration, while `Assignment.compile` and
-  `Variable.compile` will reference `var<name>` for any name at all. Six of the nine programs
-  that compile therefore emit assembly containing undefined labels, which MARS rejects. The
-  interpreter hides this because `Environment.getVariable` auto-declares a missing name as 0.
-  The affected files (`parserTest6`, `7`, `8`, `8_5`, `11`, `12`) predate the code-generation
-  labs and only ever ran under the interpreter.
-- **Two sample files use syntax the grammar rejects:** `customParserTest.txt` has an `IF`
-  with no `THEN`, and `parserTest13.txt` uses `VAR x := f(...)`, which the variable
-  declaration rule does not accept.
-- **No type checking or semantic analysis.** Integers only; undeclared variables silently
-  default to 0 in the interpreter.
+- **Incomplete code generation.** `FOR` and `READLN` are fully supported by the interpreter but do not implement code generation. Programs containing either construct will fail during compilation because `compile()` is unimplemented.
+- **Undeclared global variables.** Only variables declared in a `VAR` block are emitted in the generated `.data` section. References to undeclared globals therefore produce undefined labels in the generated MIPS assembly. The interpreter masks this issue by implicitly initializing missing variables to `0`.  The affected files (`parserTest6`, `7`, `8`, `8_5`, `11`, `12`) predate the code-generation labs and ran mainly under the interpreter.
+- **Invalid sample programs.** Two provided test files intentionally fall outside the supported grammar: `customParserTest.txt` omits `THEN` in an `IF` statement, and `parserTest13.txt` uses unsupported variable declaration syntax (`VAR x := f(...)`).
+- **Limited semantic analysis.** The compiler performs no type checking or semantic analysis. It supports only integer values, and the interpreter implicitly initializes undeclared variables to `0`.
 
 ---
 
@@ -283,7 +271,7 @@ Each lab added one stage. The directory structure still reflects it:
 
 ### Lab 2 — JFlex
 
-Lab 1's scanner was a hand-written DFA. This lab experiments with a generated one: the
+Lab 1's scanner was a hand-written DFA. This lab experiments with a generated one, where the
 rules are regular expressions, and [JFlex](https://jflex.de) compiles them into the scanner.
 
 The input is a Twitter corpus rather than Pascal source because tweets have 
@@ -309,7 +297,7 @@ generating it: array sum/average/min/max, even-or-odd, loops, multiplication, a 
 guessing game, and a music player using the MIDI syscall. `additional/` holds a two-person
 challenge (`hello.asm`, `sum.asm`) written with Audrey Cheng. Run them in MARS or SPIM.
 
-### Lab 5.5 - Memory & subroutines
+### Lab 5.5 — Memory & subroutines
 
 `labs/subroutines/subroutines.asm` — `max2`, `max3`, factorial, and Fibonacci implemented as
 proper MIPS subroutines with stack-based save/restore. This is where the calling convention
