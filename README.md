@@ -5,9 +5,6 @@ A compiler for a Pascal-like language, built from scratch in Java. It parses sou
 The same abstract syntax tree drives two backends: a tree-walking interpreter that
 executes the program directly, and a code generator that emits MIPS (compiler).
 
-Built for *Honors Advanced Topics in Computer Science: Compilers & Interpreters* (The Harker
-School, 2023–24), across a sequence of labs each adding a stage to the pipeline.
-
 **Author:** Linda Zeng
 
 ---
@@ -255,7 +252,7 @@ Twitter corpus; and various `.zip` lab submissions.
 
 ## The lab sequence
 
-Each lab added one stage. The directory structure still reflects it:
+Each lab added one stage, so the directory structure still reflects each lab.
 
 | Lab | Topic | Where |
 |---|---|---|
@@ -269,7 +266,7 @@ Each lab added one stage. The directory structure still reflects it:
 | 6 | Code generation | `emitter/Emitter.java`, `compile()` across `ast/` |
 | 7 | Compiling procedures | `ProcedureDeclaration.compile()`, `ProcedureCall.compile()` |
 
-### Lab 2 — JFlex
+### Lab 2: JFlex
 
 Lab 1's scanner was a hand-written DFA. This lab experiments with a generated one, where the
 rules are regular expressions, and [JFlex](https://jflex.de) compiles them into the scanner.
@@ -290,14 +287,14 @@ The corpus was a public sample of ~99,000 AWS/cloud-related tweets, with only th
 accompanying class presentation on the regexes is included as
 `labs/jflex/Jflex Regex presentation.pdf`. Jflex is not used in the end-to-end compiler but as a side-exercise.
 
-### Lab 5 — MIPS
+### Lab 5: MIPS
 
 Ten MIPS programs in `labs/mips/`, written **by hand** to learn the target language before
 generating it: array sum/average/min/max, even-or-odd, loops, multiplication, a random-number
 guessing game, and a music player using the MIDI syscall. `additional/` holds a two-person
 challenge (`hello.asm`, `sum.asm`) written with Audrey Cheng. Run them in MARS or SPIM.
 
-### Lab 5.5 — Memory & subroutines
+### Lab 5.5: Memory & subroutines
 
 `labs/subroutines/subroutines.asm` — `max2`, `max3`, factorial, and Fibonacci implemented as
 proper MIPS subroutines with stack-based save/restore. This is where the calling convention
